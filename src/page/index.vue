@@ -23,13 +23,13 @@
 				<h2>最新消息</h2>
 				<ul>
 					<li v-for="item in mewList">
-						<a :href="item.url">{{item.name}}</a>
+						<a :href="item.url" class="news-item">{{item.name}}</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<div class="index-right">
-			<!-- <slide-show></slide-show> -->
+			<slide-show :slides=slides></slide-show>
 			<div class="index-board-list">
 				<div v-for="(item, index) in boardList" class="index-board-item" :class="[{'line-last' : index%2!==0},'index-board-' + index]">
 					<div class="index-board-item-inner">
@@ -46,9 +46,31 @@
 	</div>
 </template>
 <script>
+import slideShow from '../components/slideShow'
 export default {
+	components: {
+		slideShow
+	},
 	data(){
 		return {
+			invTime: 2000,
+			slides: [{
+				src: require('../assets/img/slide_1.jpg'),
+				title: 'xxx1',
+				href: 'detail/analysis'
+			},{
+				src: require('../assets/img/slide_2.jpg'),
+				title: 'xxx2',
+				href: 'detail/count'
+			},{
+				src: require('../assets/img/slide_3.jpg'),
+				title: 'xxx3',
+				href: 'http://baidu.com'
+			},{
+				src: require('../assets/img/slide_4.jpg'),
+				title: 'xxx4',
+				href: 'detail/forecast'
+			}],
 			productList: {
 				pc: {
 					title: 'PC产品',
@@ -86,17 +108,17 @@ export default {
 				}
 			},
 			mewList: [{
-					name: '91助手',
+					name: '91助手91助手91助手91助手91助手91助手91助手',
 					url: 'http://weixin.com'
 				},{
-					name: '产品助手',
+					name: '产品助手产品助手产品助手产品助手产品助手产品助手产品助手',
 					url: 'http://twitter.com',
 					hot: true
 				},{
-					name: '智能地图',
+					name: '智能地图智能地',
 					url: 'http://maps.com'
 				},{
-					name: '团队语音',
+					name: '团队语音团队语音团队语音团队语音团队语音',
 					url: 'http://phone.com'
 			}],
 			slidex: [{
@@ -144,11 +166,11 @@ export default {
 		}
 	},
 	created(){
-		this.$http.get('getLxxist').then(function(data){
-			console.log(data)
-		},function(err){
-			console.log(err)
-		})
+		// this.$http.get('getLxxist').then(function(data){
+		// 	console.log(data)
+		// },function(err){
+		// 	console.log(err)
+		// })
 	}
 }
 </script>
@@ -247,6 +269,13 @@ export default {
 .new-item{
 	display: inline-block;
 	width: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.news-item{
+	display: inline-block;
+	width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
